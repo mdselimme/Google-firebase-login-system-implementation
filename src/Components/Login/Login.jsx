@@ -8,7 +8,7 @@ import app from "../Auth/firebase.init";
 import { useState } from "react";
 
 const Login = () => {
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState({});
 
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
@@ -22,20 +22,22 @@ const Login = () => {
   };
 
   const signOutUser = () => {
-    signOut(auth).then((data) => {
-      console.log(data);
+    signOut(auth).then(() => {
+      setUserData({});
     });
   };
 
   return (
     <div>
       <h1>login</h1>
-      <button onClick={userData.email ? signOutUser : googleAuthProvider}>
-        {userData.email ? "Log Out" : "Log In"}
-      </button>
-      <img src={userData.photoURL} alt="" />
-      <h1>{userData.displayName}</h1>
-      <h3>{userData.email}</h3>
+      {userData.email ? (
+        <button onClick={signOutUser}>Log Out</button>
+      ) : (
+        <button onClick={googleAuthProvider}>Log In</button>
+      )}
+      <img src={userData?.photoURL} alt="" />
+      <h1>{userData?.displayName}</h1>
+      <h3>{userData?.email}</h3>
     </div>
   );
 };
