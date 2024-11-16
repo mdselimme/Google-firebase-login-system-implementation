@@ -3,6 +3,7 @@ import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
+  updateProfile,
 } from "firebase/auth";
 import { Button, TextField } from "@mui/material";
 import { useState } from "react";
@@ -40,6 +41,9 @@ const Signin = () => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
+        updateProfile(auth.currentUser, {
+          displayName: name,
+        });
         console.log(result.user);
       })
       .catch((error) => {
@@ -52,7 +56,7 @@ const Signin = () => {
       <>
         <div style={{ width: "500px", margin: "0 auto" }}>
           <form onSubmit={HandleLogInFormSubmit}>
-            {/* <TextField
+            <TextField
               id="outlined-basic-name"
               label="Please Enter Your FullName"
               variant="outlined"
@@ -60,7 +64,8 @@ const Signin = () => {
               fullWidth
               margin="normal"
               onChange={nameValue}
-            /> */}
+              required
+            />
             <TextField
               id="outlined-basic-email"
               label="Please Enter Your Email"
@@ -69,6 +74,7 @@ const Signin = () => {
               fullWidth
               margin="normal"
               onChange={emailValue}
+              required
             />
             <TextField
               id="outlined-basic-password"
@@ -78,6 +84,7 @@ const Signin = () => {
               fullWidth
               margin="normal"
               onChange={passwordValue}
+              required
             />
             <Button
               type="submit"

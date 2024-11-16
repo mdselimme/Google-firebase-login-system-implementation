@@ -72,6 +72,7 @@ const Login = () => {
                 fullWidth
                 margin="normal"
                 onChange={emailValue}
+                required
               />
               <TextField
                 id="outlined-basic-password"
@@ -81,6 +82,7 @@ const Login = () => {
                 fullWidth
                 margin="normal"
                 onChange={passwordValue}
+                required
               />
               <Button
                 type="submit"
