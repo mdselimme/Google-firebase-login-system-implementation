@@ -10,6 +10,8 @@ import { Button, TextField } from "@mui/material";
 
 const Login = () => {
   const [userData, setUserData] = useState({});
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
@@ -28,9 +30,17 @@ const Login = () => {
     });
   };
 
+  const emailValue = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const passwordValue = (e) => {
+    setPassword(e.target.value);
+  };
+
   const HandleLogInFormSubmit = (e) => {
     e.preventDefault();
-    console.log("submit form");
+    console.log(email, password);
   };
 
   return (
@@ -51,6 +61,7 @@ const Login = () => {
                 type="email"
                 fullWidth
                 margin="normal"
+                onChange={emailValue}
               />
               <TextField
                 id="outlined-basic"
@@ -59,6 +70,7 @@ const Login = () => {
                 type="password"
                 fullWidth
                 margin="normal"
+                onChange={passwordValue}
               />
               <Button
                 type="submit"
