@@ -7,6 +7,7 @@ import {
 import app from "../Auth/firebase.init";
 import { useState } from "react";
 import { Button, TextField } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 const Login = () => {
   const [userData, setUserData] = useState({});
@@ -55,7 +56,7 @@ const Login = () => {
           <div style={{ width: "500px", margin: "0 auto" }}>
             <form onSubmit={HandleLogInFormSubmit}>
               <TextField
-                id="outlined-basic"
+                id="outlined-basic-email"
                 label="Please Enter Your Email"
                 variant="outlined"
                 type="email"
@@ -64,7 +65,7 @@ const Login = () => {
                 onChange={emailValue}
               />
               <TextField
-                id="outlined-basic"
+                id="outlined-basic-password"
                 label="Please Enter Your Email"
                 variant="outlined"
                 type="password"
@@ -84,6 +85,13 @@ const Login = () => {
             <Button onClick={googleAuthProvider} variant="contained">
               Google Sign In
             </Button>
+            <p>
+              {" "}
+              No Account ? Go to
+              <NavLink to={"/signin"} style={{ marginLeft: "8px" }}>
+                Register
+              </NavLink>
+            </p>
           </div>
         </>
       )}
