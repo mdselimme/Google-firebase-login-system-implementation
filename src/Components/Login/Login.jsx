@@ -6,6 +6,7 @@ import {
 } from "firebase/auth";
 import app from "../Auth/firebase.init";
 import { useState } from "react";
+import { Button } from "@mui/material";
 
 const Login = () => {
   const [userData, setUserData] = useState({});
@@ -31,9 +32,13 @@ const Login = () => {
     <div>
       <h1>login</h1>
       {userData.email ? (
-        <button onClick={signOutUser}>Log Out</button>
+        <Button onClick={signOutUser} variant="contained">
+          Sign Out
+        </Button>
       ) : (
-        <button onClick={googleAuthProvider}>Log In</button>
+        <Button onClick={googleAuthProvider} variant="contained">
+          Log in
+        </Button>
       )}
       <img src={userData?.photoURL} alt="" />
       <h1>{userData?.displayName}</h1>
