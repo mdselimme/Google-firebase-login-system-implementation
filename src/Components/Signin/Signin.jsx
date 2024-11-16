@@ -43,7 +43,7 @@ const Signin = () => {
         console.log(result.user);
       })
       .catch((error) => {
-        console.log(error.message);
+        console.log(error.message, error.code);
       });
   };
   return (

@@ -1,6 +1,7 @@
 import {
   getAuth,
   GoogleAuthProvider,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
 } from "firebase/auth";
@@ -42,6 +43,14 @@ const Login = () => {
   const HandleLogInFormSubmit = (e) => {
     e.preventDefault();
     console.log(email, password);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((err) => {
+        console.log(err.message, err.code);
+      });
   };
 
   return (
