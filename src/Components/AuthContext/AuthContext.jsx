@@ -1,11 +1,55 @@
-import { createContext, useContext } from "react";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
+import PropTypes from "prop-types";
+import { createContext, useEffect, useState } from "react";
+import app from "../Auth/firebase.init";
 
-import React from "react";
+// eslint-disable-next-line react-refresh/only-export-components
+export const AuthProvider = createContext(null);
 
 const AuthContext = ({ children }) => {
-  export const levelContext = createContext(null);
-  return;
-  <AuthContext.Provider></AuthContext.Provider>;
+  const [authData, setAuthData] = useState(null);
+  const auth = getAuth(app);
+
+  const createUser = (email, password) => {
+    return createUserWithEmailAndPassword(email, password);
+  };
+
+  const signInEmailAndPassword = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const signOutPeople = () => {
+    return signOut(auth);
+  };
+
+  useEffect(() => {
+    const unsubcribed = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setAuthData(currentUser);
+      }
+      return () => unsubcribed();
+    });
+  }, [auth]);
+
+  const authInfo = {
+    authData,
+    createUser,
+    signOutPeople,
+    signInEmailAndPassword,
+  };
+
+  return (
+    <AuthProvider.Provider value={authInfo}>{children}</AuthProvider.Provider>
+  );
 };
 
 export default AuthContext;
+AuthContext.propTypes = {
+  children: PropTypes.node,
+};

@@ -1,22 +1,22 @@
 import {
-  createUserWithEmailAndPassword,
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
 import { Button, TextField } from "@mui/material";
-import { useState } from "react";
-import app from "../Auth/firebase.init";
+import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthProvider } from "../AuthContext/AuthContext";
 
 const Signin = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
+
+  const auth = getAuth();
 
   const googleAuthProvider = () => {
     signInWithPopup(auth, provider).then((result) => {
@@ -37,9 +37,11 @@ const Signin = () => {
     setPassword(e.target.value);
   };
 
+  const { createUser } = useContext(AuthProvider);
+
   const HandleLogInFormSubmit = (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
+    createUser(email, password)
       .then((result) => {
         updateProfile(auth.currentUser, {
           displayName: name,

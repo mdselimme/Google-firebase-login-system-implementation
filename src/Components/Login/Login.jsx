@@ -1,22 +1,23 @@
 import {
   getAuth,
   GoogleAuthProvider,
-  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import app from "../Auth/firebase.init";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import { AuthProvider } from "../AuthContext/AuthContext";
 
 const Login = () => {
   const [userData, setUserData] = useState({});
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const auth = getAuth(app);
+  const { signInEmailAndPassword, signOutPeople, authData } =
+    useContext(AuthProvider);
   const provider = new GoogleAuthProvider();
+
+  const auth = getAuth();
 
   const googleAuthProvider = () => {
     signInWithPopup(auth, provider).then((result) => {
@@ -27,9 +28,7 @@ const Login = () => {
   };
 
   const signOutUser = () => {
-    signOut(auth).then(() => {
-      setUserData({});
-    });
+    signOutPeople(auth).then(() => {});
   };
 
   const emailValue = (e) => {
@@ -43,25 +42,31 @@ const Login = () => {
   const HandleLogInFormSubmit = (e) => {
     e.preventDefault();
     console.log(email, password);
-    signInWithEmailAndPassword(auth, email, password)
+    signInEmailAndPassword(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        setUserData(user);
       })
       .catch((err) => {
         console.log(err.message, err.code);
       });
+    e.refresh();
   };
 
   return (
     <div>
-      <h1>log In</h1>
       {userData.email ? (
-        <Button onClick={signOutUser} variant="contained">
-          Sign Out
-        </Button>
+        <div>
+          <img src={authData?.photoURL} alt="" />
+          <h1>{authData?.displayName}</h1>
+          <h3>{authData?.email}</h3>
+          <Button onClick={signOutUser} variant="contained">
+            Sign Out
+          </Button>
+        </div>
       ) : (
-        <>
+        <div>
+          <h1>log In</h1>
           <div style={{ width: "500px", margin: "0 auto" }}>
             <form onSubmit={HandleLogInFormSubmit}>
               <TextField
@@ -104,11 +109,8 @@ const Login = () => {
               </NavLink>
             </p>
           </div>
-        </>
+        </div>
       )}
-      <img src={userData?.photoURL} alt="" />
-      <h1>{userData?.displayName}</h1>
-      <h3>{userData?.email}</h3>
     </div>
   );
 };
