@@ -55,7 +55,7 @@ const Login = () => {
 
   return (
     <div>
-      <h1>login</h1>
+      <h1>log In</h1>
       {userData.email ? (
         <Button onClick={signOutUser} variant="contained">
           Sign Out
@@ -86,9 +86,9 @@ const Login = () => {
               />
               <Button
                 type="submit"
+                style={{ margin: "10px 0", padding: "10px" }}
                 variant="contained"
                 fullWidth
-                sx={{ margin: "10px", padding: "10px" }}
               >
                 Log In
               </Button>

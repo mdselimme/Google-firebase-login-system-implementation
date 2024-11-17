@@ -89,8 +89,8 @@ const Signin = () => {
             <Button
               type="submit"
               variant="contained"
+              style={{ margin: "10px 0", padding: "10px" }}
               fullWidth
-              sx={{ margin: "10px", padding: "10px" }}
             >
               Sign In
             </Button>
