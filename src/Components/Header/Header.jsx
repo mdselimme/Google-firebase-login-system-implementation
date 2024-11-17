@@ -3,14 +3,14 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
-import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
+import { NavLink } from "react-router-dom";
 // import MenuIcon from "@mui/icons-material/Menu";
 const Header = () => {
   return (
     <div>
-      <Box sx={{ flexGrow: 1, bgcolor: "white" }}>
-        <AppBar position="static">
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static" sx={{ bgcolor: "white", color: "#010001" }}>
           <Toolbar>
             <IconButton
               size="large"
@@ -21,10 +21,44 @@ const Header = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              News
+            <Typography
+              variant="h6"
+              component="div"
+              fontWeight={"800"}
+              sx={{ flexGrow: 1 }}
+            >
+              Firebase Authentication
             </Typography>
-            <Button color="inherit">Login</Button>
+            <NavLink
+              style={{
+                margin: "0 20px",
+                textDecoration: "none",
+                color: "#010001",
+              }}
+              to={"/"}
+            >
+              Home
+            </NavLink>
+            <NavLink
+              style={{
+                margin: "0 20px",
+                textDecoration: "none",
+                color: "#010001",
+              }}
+              to={"/login"}
+            >
+              Log In
+            </NavLink>
+            <NavLink
+              style={{
+                margin: "0 20px",
+                textDecoration: "none",
+                color: "#010001",
+              }}
+              to={"/signin"}
+            >
+              Sign In
+            </NavLink>
           </Toolbar>
         </AppBar>
       </Box>
