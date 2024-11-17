@@ -1,9 +1,11 @@
-const AuthContext = () => {
-  return (
-    <div>
-      <h1>AuthContext</h1>
-    </div>
-  );
+import { createContext, useContext } from "react";
+
+import React from "react";
+
+const AuthContext = ({ children }) => {
+  export const levelContext = createContext(null);
+  return;
+  <AuthContext.Provider></AuthContext.Provider>;
 };
 
 export default AuthContext;
