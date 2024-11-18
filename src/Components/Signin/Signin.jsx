@@ -13,7 +13,7 @@ const Signin = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const { createUser, setAuthData } = useContext(AuthProvider);
   const provider = new GoogleAuthProvider();
 
   const auth = getAuth();
@@ -21,6 +21,7 @@ const Signin = () => {
   const googleAuthProvider = () => {
     signInWithPopup(auth, provider).then((result) => {
       const user = result.user;
+      setAuthData(user);
       console.log(user);
     });
   };
@@ -36,8 +37,6 @@ const Signin = () => {
   const passwordValue = (e) => {
     setPassword(e.target.value);
   };
-
-  const { createUser } = useContext(AuthProvider);
 
   const HandleLogInFormSubmit = (e) => {
     e.preventDefault();

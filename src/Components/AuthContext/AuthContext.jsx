@@ -42,6 +42,7 @@ const AuthContext = ({ children }) => {
     createUser,
     signOutPeople,
     signInEmailAndPassword,
+    setAuthData,
   };
 
   return (

@@ -1,19 +1,13 @@
-import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-} from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useContext, useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { AuthProvider } from "../AuthContext/AuthContext";
 
 const Login = () => {
-  const [userData, setUserData] = useState({});
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signInEmailAndPassword, signOutPeople, authData } =
+  const { signInEmailAndPassword, signOutPeople, authData, setAuthData } =
     useContext(AuthProvider);
   const provider = new GoogleAuthProvider();
 
@@ -23,12 +17,14 @@ const Login = () => {
     signInWithPopup(auth, provider).then((result) => {
       const user = result.user;
       console.log(user);
-      setUserData(user);
+      setAuthData(user);
     });
   };
 
   const signOutUser = () => {
-    signOutPeople(auth).then(() => {});
+    signOutPeople().then(() => {
+      setAuthData(null);
+    });
   };
 
   const emailValue = (e) => {
@@ -45,17 +41,16 @@ const Login = () => {
     signInEmailAndPassword(email, password)
       .then((result) => {
         const user = result.user;
-        setUserData(user);
+        setAuthData(user);
       })
       .catch((err) => {
         console.log(err.message, err.code);
       });
-    e.refresh();
   };
 
   return (
     <div>
-      {userData.email ? (
+      {authData?.email ? (
         <div>
           <img src={authData?.photoURL} alt="" />
           <h1>{authData?.displayName}</h1>
