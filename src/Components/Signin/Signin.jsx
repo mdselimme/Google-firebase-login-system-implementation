@@ -6,17 +6,19 @@ import {
 } from "firebase/auth";
 import { Button, TextField } from "@mui/material";
 import { useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AuthProvider } from "../AuthContext/AuthContext";
 
 const Signin = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { createUser, setAuthData, navigate } = useContext(AuthProvider);
+  const { createUser, setAuthData } = useContext(AuthProvider);
   const provider = new GoogleAuthProvider();
 
   const auth = getAuth();
+
+  const navigate = useNavigate();
 
   const googleAuthProvider = () => {
     signInWithPopup(auth, provider).then((result) => {

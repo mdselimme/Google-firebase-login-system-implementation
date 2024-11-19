@@ -4,13 +4,27 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthProvider } from "../AuthContext/AuthContext";
 import { Button } from "@mui/material";
 // import MenuIcon from "@mui/icons-material/Menu";
 const Header = () => {
-  const { authData, signOutPeople } = useContext(AuthProvider);
+  const { authData, signOutPeople, setAuthData } = useContext(AuthProvider);
+
+  const navigate = useNavigate();
+
+  const signOutFromApp = () => {
+    signOutPeople()
+      .then(() => {
+        setAuthData({});
+        navigate("/login");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    console.log("sighn out");
+  };
 
   return (
     <div>
@@ -32,7 +46,12 @@ const Header = () => {
               fontWeight={"800"}
               sx={{ flexGrow: 1 }}
             >
-              Firebase Authentication
+              <Link
+                to={"/"}
+                style={{ textDecoration: "none", fontSize: "3rem" }}
+              >
+                Firebase Authentication
+              </Link>
             </Typography>
             <NavLink
               style={{
@@ -44,7 +63,7 @@ const Header = () => {
             >
               Home
             </NavLink>
-            {authData.email ? (
+            {authData?.email ? (
               <>
                 <NavLink
                   style={{
@@ -53,9 +72,9 @@ const Header = () => {
                     color: "#010001",
                   }}
                 >
-                  {authData.displayName}
+                  {authData?.displayName}
                 </NavLink>
-                <Button onClick={signOutPeople} variant="contained">
+                <Button onClick={signOutFromApp} variant="contained">
                   Sign Out
                 </Button>
               </>
