@@ -13,7 +13,7 @@ const Signin = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { createUser, setAuthData } = useContext(AuthProvider);
+  const { createUser, setAuthData, navigate } = useContext(AuthProvider);
   const provider = new GoogleAuthProvider();
 
   const auth = getAuth();
@@ -23,6 +23,7 @@ const Signin = () => {
       const user = result.user;
       setAuthData(user);
       console.log(user);
+      navigate("/");
     });
   };
 
@@ -45,6 +46,7 @@ const Signin = () => {
         updateProfile(auth.currentUser, {
           displayName: name,
         });
+        navigate("/");
         console.log(result.user);
       })
       .catch((error) => {

@@ -1,7 +1,7 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useContext, useState } from "react";
 import { Button, TextField } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AuthProvider } from "../AuthContext/AuthContext";
 
 const Login = () => {
@@ -12,12 +12,14 @@ const Login = () => {
   const provider = new GoogleAuthProvider();
 
   const auth = getAuth();
+  const navigate = useNavigate();
 
   const googleAuthProvider = () => {
     signInWithPopup(auth, provider).then((result) => {
       const user = result.user;
       console.log(user);
       setAuthData(user);
+      navigate("/");
     });
   };
 
@@ -42,6 +44,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         setAuthData(user);
+        navigate("/");
       })
       .catch((err) => {
         console.log(err.message, err.code);
