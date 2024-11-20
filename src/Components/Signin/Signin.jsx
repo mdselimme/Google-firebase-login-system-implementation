@@ -49,7 +49,7 @@ const Signin = () => {
           displayName: name,
         });
         navigate("/");
-        console.log(result.user);
+        setAuthData(result.user);
       })
       .catch((error) => {
         console.log(error.message, error.code);

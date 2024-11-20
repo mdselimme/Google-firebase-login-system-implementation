@@ -11,7 +11,7 @@ const Home = () => {
     <div>
       <h1>Home</h1>
      {
-       authData?.email ? <h1>Sign In As {authData.displayName}</h1> : <> <h3>
+       authData?.email ? <h1>Sign In As <span style={{color:"green"}}>{authData.displayName}</span></h1> : <> <h3>
        Please Login to explore more
      </h3>
      <div style={{ marginBottom: "1.5rem" }}>
