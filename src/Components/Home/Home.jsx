@@ -1,14 +1,21 @@
 import { Button, ImageList, ImageListItem } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthProvider } from "../AuthContext/AuthContext";
 
 const Home = () => {
+
+  const {authData} = useContext(AuthProvider)
+
   return (
     <div>
       <h1>Home</h1>
-      <h3>
-        This is Home tab. Here you can explore Firebase Authentication Login
-        System
-      </h3>
+     {
+       authData?.email ? <h1>Sign In As {authData.displayName}</h1> : <h3>
+       This is Home tab. Here you can explore Firebase Authentication Login
+       System
+     </h3>
+     }
       <div style={{ marginBottom: "1.5rem" }}>
         <Link to={"/login"}>
           <Button style={{ marginRight: "10px" }} variant="contained">
