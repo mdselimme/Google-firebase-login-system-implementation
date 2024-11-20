@@ -63,6 +63,16 @@ const Header = () => {
             >
               Home
             </NavLink>
+            <NavLink
+              style={{
+                margin: "0 20px",
+                textDecoration: "none",
+                color: "#010001",
+              }}
+              to={"/order"}
+            >
+             Order
+            </NavLink>
             {authData?.email ? (
               <>
                 <NavLink
