@@ -11,21 +11,20 @@ const Home = () => {
     <div>
       <h1>Home</h1>
      {
-       authData?.email ? <h1>Sign In As {authData.displayName}</h1> : <h3>
-       This is Home tab. Here you can explore Firebase Authentication Login
-       System
+       authData?.email ? <h1>Sign In As {authData.displayName}</h1> : <> <h3>
+       Please Login to explore more
      </h3>
+     <div style={{ marginBottom: "1.5rem" }}>
+     <Link to={"/login"}>
+       <Button style={{ marginRight: "10px" }} variant="contained">
+         Go to Log In
+       </Button>
+     </Link>
+     <Link to={"/signin"}>
+       <Button variant="contained">Go to Sign In</Button>
+     </Link>
+   </div></>
      }
-      <div style={{ marginBottom: "1.5rem" }}>
-        <Link to={"/login"}>
-          <Button style={{ marginRight: "10px" }} variant="contained">
-            Go to Log In
-          </Button>
-        </Link>
-        <Link to={"/signin"}>
-          <Button variant="contained">Go to Sign In</Button>
-        </Link>
-      </div>
       <ImageList
         sx={{ width: "80%", height: "600px", margin: "0 auto" }}
         variant="woven"
