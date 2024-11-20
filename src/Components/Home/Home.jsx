@@ -1,4 +1,4 @@
-import { Button, ImageList, ImageListItem } from "@mui/material";
+import { Button, CircularProgress, ImageList, ImageListItem } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthProvider } from "../AuthContext/AuthContext";
@@ -23,7 +23,13 @@ const Home = () => {
      <Link to={"/signin"}>
        <Button variant="contained">Go to Sign In</Button>
      </Link>
+     {
+    <div>
+      {authData?.displayName  || <CircularProgress color="secondary" />  } 
+    </div>
+   }
    </div></>
+  
      }
       <ImageList
         sx={{ width: "80%", height: "600px", margin: "0 auto" }}
@@ -42,6 +48,7 @@ const Home = () => {
           </ImageListItem>
         ))}
       </ImageList>
+
     </div>
   );
 };

@@ -14,17 +14,21 @@ export const AuthProvider = createContext(null);
 
 const AuthContext = ({ children }) => {
   const [authData, setAuthData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const auth = getAuth(app);
 
   const createUser = (email, password) => {
+    setLoading(true)
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const signInEmailAndPassword = (email, password) => {
+    setLoading(true)
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   const signOutPeople = () => {
+    setLoading(true)
     return signOut(auth);
   };
 
@@ -32,12 +36,14 @@ const AuthContext = ({ children }) => {
     const unsubcribed = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setAuthData(currentUser);
+        setLoading(false)
       }
       return () => unsubcribed();
     });
   }, [auth]);
 
   const authInfo = {
+    loading,
     authData,
     createUser,
     signOutPeople,
