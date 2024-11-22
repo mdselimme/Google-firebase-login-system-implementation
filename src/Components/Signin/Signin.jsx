@@ -13,7 +13,7 @@ const Signin = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { createUser, setAuthData } = useContext(AuthProvider);
+  const { createUser, setAuthData, setLoader } = useContext(AuthProvider);
   const provider = new GoogleAuthProvider();
 
   const auth = getAuth();
@@ -24,6 +24,7 @@ const Signin = () => {
     signInWithPopup(auth, provider).then((result) => {
       const user = result.user;
       setAuthData(user);
+      setLoader(false);
       console.log(user);
       navigate("/");
     });
@@ -50,6 +51,7 @@ const Signin = () => {
         });
         navigate("/");
         setAuthData(result.user);
+        setLoader(false);
       })
       .catch((error) => {
         console.log(error.message, error.code);

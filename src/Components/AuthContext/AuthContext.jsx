@@ -33,6 +33,7 @@ const AuthContext = ({ children }) => {
   };
 
   useEffect(() => {
+    setLoading(true);
     const unsubcribed = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setAuthData(currentUser);

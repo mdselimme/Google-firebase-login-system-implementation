@@ -32,7 +32,7 @@ const Home = () => {
             <Link to={"/signin"}>
               <Button variant="contained">Go to Sign In</Button>
             </Link>
-            {loader && <CircularProgress color="secondary" />}
+            {loader ? <CircularProgress color="secondary" /> : ""}
           </div>
         </>
       )}
