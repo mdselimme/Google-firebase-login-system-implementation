@@ -18,17 +18,17 @@ const AuthContext = ({ children }) => {
   const auth = getAuth(app);
 
   const createUser = (email, password) => {
-    setLoading(true)
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const signInEmailAndPassword = (email, password) => {
-    setLoading(true)
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   const signOutPeople = () => {
-    setLoading(true)
+    setLoading(true);
     return signOut(auth);
   };
 
@@ -36,10 +36,10 @@ const AuthContext = ({ children }) => {
     const unsubcribed = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setAuthData(currentUser);
-        setLoading(false)
       }
       return () => unsubcribed();
     });
+    setLoading(false);
   }, [auth]);
 
   const authInfo = {

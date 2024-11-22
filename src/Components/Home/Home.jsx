@@ -1,36 +1,41 @@
-import { Button, CircularProgress, ImageList, ImageListItem } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  ImageList,
+  ImageListItem,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthProvider } from "../AuthContext/AuthContext";
 
 const Home = () => {
-
-  const {authData} = useContext(AuthProvider)
+  const { authData, loader } = useContext(AuthProvider);
 
   return (
     <div>
       <h1>Home</h1>
-     {
-       authData?.email ? <h1>Sign In As <span style={{color:"green"}}>{authData.displayName}</span></h1> : <> <h3>
-       Please Login to explore more
-     </h3>
-     <div style={{ marginBottom: "1.5rem" }}>
-     <Link to={"/login"}>
-       <Button style={{ marginRight: "10px" }} variant="contained">
-         Go to Log In
-       </Button>
-     </Link>
-     <Link to={"/signin"}>
-       <Button variant="contained">Go to Sign In</Button>
-     </Link>
-     {
-    <div>
-      {authData?.displayName  || <CircularProgress color="secondary" />  } 
-    </div>
-   }
-   </div></>
-  
-     }
+      {authData?.email ? (
+        <h1>
+          Sign In As{" "}
+          <span style={{ color: "green" }}>{authData.displayName}</span>
+        </h1>
+      ) : (
+        <>
+          {" "}
+          <h3>Please Login to explore more</h3>
+          <div style={{ marginBottom: "1.5rem" }}>
+            <Link to={"/login"}>
+              <Button style={{ marginRight: "10px" }} variant="contained">
+                Go to Log In
+              </Button>
+            </Link>
+            <Link to={"/signin"}>
+              <Button variant="contained">Go to Sign In</Button>
+            </Link>
+            {loader && <CircularProgress color="secondary" />}
+          </div>
+        </>
+      )}
       <ImageList
         sx={{ width: "80%", height: "600px", margin: "0 auto" }}
         variant="woven"
@@ -48,7 +53,6 @@ const Home = () => {
           </ImageListItem>
         ))}
       </ImageList>
-
     </div>
   );
 };
