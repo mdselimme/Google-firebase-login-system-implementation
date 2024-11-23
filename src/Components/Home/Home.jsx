@@ -9,7 +9,7 @@ import { useContext } from "react";
 import { AuthProvider } from "../AuthContext/AuthContext";
 
 const Home = () => {
-  const { authData, loader } = useContext(AuthProvider);
+  const { authData } = useContext(AuthProvider);
 
   return (
     <div>
@@ -32,7 +32,9 @@ const Home = () => {
             <Link to={"/signin"}>
               <Button variant="contained">Go to Sign In</Button>
             </Link>
-            {loader ? <CircularProgress color="secondary" /> : ""}
+            <div>
+              {authData?.email ? " " : <CircularProgress color="secondary" />}
+            </div>
           </div>
         </>
       )}

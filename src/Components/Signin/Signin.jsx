@@ -13,7 +13,7 @@ const Signin = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { createUser, setAuthData, setLoader } = useContext(AuthProvider);
+  const { createUser, setLoader } = useContext(AuthProvider);
   const provider = new GoogleAuthProvider();
 
   const auth = getAuth();
@@ -23,7 +23,7 @@ const Signin = () => {
   const googleAuthProvider = () => {
     signInWithPopup(auth, provider).then((result) => {
       const user = result.user;
-      setAuthData(user);
+      // setAuthData(user);
       setLoader(false);
       console.log(user);
       navigate("/");
@@ -45,17 +45,18 @@ const Signin = () => {
   const HandleLogInFormSubmit = (e) => {
     e.preventDefault();
     createUser(email, password)
-      .then((result) => {
+      .then(() => {
         updateProfile(auth.currentUser, {
           displayName: name,
         });
         navigate("/");
-        setAuthData(result.user);
+        // setAuthData(result.user);
         setLoader(false);
       })
       .catch((error) => {
         console.log(error.message, error.code);
       });
+    e.reset();
   };
   return (
     <div>
