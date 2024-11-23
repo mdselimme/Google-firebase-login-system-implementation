@@ -71,9 +71,9 @@ const Header = () => {
               }}
               to={"/order"}
             >
-             Order
+              Order
             </NavLink>
-            {authData?.email ? (
+            {authData?.displayName ? (
               <>
                 <NavLink
                   style={{

@@ -38,7 +38,10 @@ const AuthContext = ({ children }) => {
 
   const githubLogIn = () => {
     signInWithPopup(auth, githubProvider)
-      .then(() => {})
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
       .catch((erro) => {
         console.log(erro.message);
       });
@@ -49,10 +52,10 @@ const AuthContext = ({ children }) => {
     const unsubcribed = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setAuthData(currentUser);
+        setLoading(false);
       }
       return () => unsubcribed();
     });
-    setLoading(false);
   }, [auth]);
 
   const authInfo = {

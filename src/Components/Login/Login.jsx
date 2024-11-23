@@ -46,7 +46,6 @@ const Login = () => {
 
   return (
     <div>
-      (
       <div>
         <h1>log In</h1>
         <div style={{ width: "500px", margin: "0 auto" }}>
