@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthProvider } from "../AuthContext/AuthContext";
+import GithubeAuth from "../Auth/GithubeAuth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -82,6 +83,7 @@ const Login = () => {
           <Button onClick={googleAuthProvider} variant="contained">
             Google Sign In
           </Button>
+          <GithubeAuth></GithubeAuth>
           <p>
             {" "}
             No Account ? Go to
@@ -91,7 +93,6 @@ const Login = () => {
           </p>
         </div>
       </div>
-      )
     </div>
   );
 };

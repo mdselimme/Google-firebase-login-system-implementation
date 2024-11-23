@@ -8,6 +8,7 @@ import { Button, TextField } from "@mui/material";
 import { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthProvider } from "../AuthContext/AuthContext";
+import GithubeAuth from "../Auth/GithubeAuth";
 
 const Signin = () => {
   const [name, setName] = useState("");
@@ -106,6 +107,7 @@ const Signin = () => {
           <Button onClick={googleAuthProvider} variant="contained">
             Google Sign In
           </Button>
+          <GithubeAuth></GithubeAuth>
           <p>
             {" "}
             Already Account ? Go to
